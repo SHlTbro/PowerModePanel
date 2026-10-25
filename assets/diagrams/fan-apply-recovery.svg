@@ -451,13 +451,13 @@ rect.c-bg-rect { fill: var(--bg); }
 
 
         <!-- Edge paths -->
-        <path data-edge-from="build" data-edge-to="write" data-edge-label="曲线范围与最低风量合法" data-edge-key="0" data-edge-id="build-write" data-composition-routing="workflow-v2-auto" data-edge-role="main" data-composition-points="143,178;143,226" d="M 143 178 L 143 226" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="rollback" data-edge-to="oem-auto" data-edge-label="恢复报错或回读不一致" data-edge-key="1" data-edge-id="restore-fail" data-composition-routing="workflow-v2-auto" data-edge-role="error" data-composition-points="418.2,452;418.2,548;588.8,548" d="M 418.2 452 L 418.2 548 L 588.8 548" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="rollback" data-edge-to="restored" data-edge-label="恢复回读一致" data-edge-key="2" data-edge-id="restore-pass" data-composition-routing="workflow-v2-auto" data-edge-role="branch" data-composition-points="513.2,414;588.8,414" d="M 513.2 414 L 588.8 414" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="verify" data-edge-to="rollback" data-edge-label="任一回读不一致" data-edge-key="3" data-edge-id="verify-rollback" data-composition-routing="workflow-v2-auto" data-edge-role="error" data-composition-points="418.2,318;418.2,376" d="M 418.2 318 L 418.2 376" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="verify" data-edge-to="success" data-edge-label="全部回读一致" data-edge-key="4" data-edge-id="verify-success" data-composition-routing="workflow-v2-auto" data-edge-role="main" data-composition-points="513.2,272;588.8,272" d="M 513.2 272 L 588.8 272" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="write" data-edge-to="rollback" data-edge-label="任一写入或保存失败" data-edge-key="5" data-edge-id="write-rollback" data-composition-routing="workflow-v2-auto" data-edge-role="error" data-composition-points="48,272;20,272;20,414;323.2,414" d="M 48 272 L 20 272 L 20 414 L 323.2 414" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="write" data-edge-to="verify" data-edge-label="写入及保存完成" data-edge-key="6" data-edge-id="write-verify" data-composition-routing="workflow-v2-auto" data-edge-role="main" data-composition-points="238,272;323.2,272" d="M 238 272 L 323.2 272" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="build" data-edge-to="write" data-edge-label="曲线范围与最低风量合法" data-edge-key="0" data-edge-id="build-write" data-composition-routing="workflow-v2-auto" data-edge-role="main" data-composition-points="143,178;143,226" d="M 143 178 L 143 226" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="rollback" data-edge-to="oem-auto" data-edge-label="恢复报错或回读不一致" data-edge-key="1" data-edge-id="restore-fail" data-composition-routing="workflow-v2-auto" data-edge-role="error" data-composition-points="418.2,452;418.2,548;588.8,548" d="M 418.2 452 L 418.2 548 L 588.8 548" class="a-security" stroke-width="1.4" marker-end="url(#arrowhead-security)"/>
+        <path data-edge-from="rollback" data-edge-to="restored" data-edge-label="恢复回读一致" data-edge-key="2" data-edge-id="restore-pass" data-composition-routing="workflow-v2-auto" data-edge-role="branch" data-composition-points="513.2,414;588.8,414" d="M 513.2 414 L 588.8 414" class="a-security" stroke-width="1.4" marker-end="url(#arrowhead-security)"/>
+        <path data-edge-from="verify" data-edge-to="rollback" data-edge-label="任一回读不一致" data-edge-key="3" data-edge-id="verify-rollback" data-composition-routing="workflow-v2-auto" data-edge-role="error" data-composition-points="418.2,318;418.2,376" d="M 418.2 318 L 418.2 376" class="a-security" stroke-width="1.4" marker-end="url(#arrowhead-security)"/>
+        <path data-edge-from="verify" data-edge-to="success" data-edge-label="全部回读一致" data-edge-key="4" data-edge-id="verify-success" data-composition-routing="workflow-v2-auto" data-edge-role="main" data-composition-points="513.2,272;588.8,272" d="M 513.2 272 L 588.8 272" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="write" data-edge-to="rollback" data-edge-label="任一写入或保存失败" data-edge-key="5" data-edge-id="write-rollback" data-composition-routing="workflow-v2-auto" data-edge-role="error" data-composition-points="48,272;20,272;20,414;323.2,414" d="M 48 272 L 20 272 L 20 414 L 323.2 414" class="a-security" stroke-width="1.4" marker-end="url(#arrowhead-security)"/>
+        <path data-edge-from="write" data-edge-to="verify" data-edge-label="写入及保存完成" data-edge-key="6" data-edge-id="write-verify" data-composition-routing="workflow-v2-auto" data-edge-role="main" data-composition-points="238,272;323.2,272" d="M 238 272 L 323.2 272" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
 
         <!-- Nodes -->
         <g id="node-build" data-node-id="build" data-node-label="生成低噪曲线" tabindex="0" role="button" aria-label="聚焦生成低噪曲线，保留原自定义缓存，检查最低风量, 独立风扇控制 · 同一 EXE 内" aria-pressed="false" data-node-kind="backend" data-node-sublabel="保留原自定义缓存，检查最低风量" data-node-tag="CPU 75→85°C · GPU 70→80°C" data-node-context="独立风扇控制 · 同一 EXE 内">
@@ -551,31 +551,31 @@ rect.c-bg-rect { fill: var(--bg); }
         <!-- Edge labels -->
         <g data-edge-from="build" data-edge-to="write" data-edge-label="曲线范围与最低风量合法" data-edge-key="0" data-edge-id="build-write">
           <rect x="85.2" y="192" width="115.6" height="14" rx="3" class="c-mask"/>
-          <text x="143" y="202" class="t-edge-default" font-size="8" text-anchor="middle">曲线范围与最低风量合法</text>
+          <text x="143" y="202" class="t-edge-emphasis" font-size="8" text-anchor="middle">曲线范围与最低风量合法</text>
         </g>
         <g data-edge-from="rollback" data-edge-to="oem-auto" data-edge-label="恢复报错或回读不一致" data-edge-key="1" data-edge-id="restore-fail">
           <rect x="450.5" y="528" width="106" height="14" rx="3" class="c-mask"/>
-          <text x="503.5" y="538" class="t-edge-default" font-size="8" text-anchor="middle">恢复报错或回读不一致</text>
+          <text x="503.5" y="538" class="t-edge-security" font-size="8" text-anchor="middle">恢复报错或回读不一致</text>
         </g>
         <g data-edge-from="rollback" data-edge-to="restored" data-edge-label="恢复回读一致" data-edge-key="2" data-edge-id="restore-pass">
           <rect x="517.2" y="394" width="67.6" height="14" rx="3" class="c-mask"/>
-          <text x="551" y="404" class="t-edge-default" font-size="8" text-anchor="middle">恢复回读一致</text>
+          <text x="551" y="404" class="t-edge-security" font-size="8" text-anchor="middle">恢复回读一致</text>
         </g>
         <g data-edge-from="verify" data-edge-to="rollback" data-edge-label="任一回读不一致" data-edge-key="3" data-edge-id="verify-rollback">
           <rect x="379.59999999999997" y="337" width="77.2" height="14" rx="3" class="c-mask"/>
-          <text x="418.2" y="347" class="t-edge-default" font-size="8" text-anchor="middle">任一回读不一致</text>
+          <text x="418.2" y="347" class="t-edge-security" font-size="8" text-anchor="middle">任一回读不一致</text>
         </g>
         <g data-edge-from="verify" data-edge-to="success" data-edge-label="全部回读一致" data-edge-key="4" data-edge-id="verify-success">
           <rect x="517.2" y="252" width="67.6" height="14" rx="3" class="c-mask"/>
-          <text x="551" y="262" class="t-edge-default" font-size="8" text-anchor="middle">全部回读一致</text>
+          <text x="551" y="262" class="t-edge-emphasis" font-size="8" text-anchor="middle">全部回读一致</text>
         </g>
         <g data-edge-from="write" data-edge-to="rollback" data-edge-label="任一写入或保存失败" data-edge-key="5" data-edge-id="write-rollback">
           <rect x="123.4" y="394" width="96.39999999999999" height="14" rx="3" class="c-mask"/>
-          <text x="171.6" y="404" class="t-edge-default" font-size="8" text-anchor="middle">任一写入或保存失败</text>
+          <text x="171.6" y="404" class="t-edge-security" font-size="8" text-anchor="middle">任一写入或保存失败</text>
         </g>
         <g data-edge-from="write" data-edge-to="verify" data-edge-label="写入及保存完成" data-edge-key="6" data-edge-id="write-verify">
           <rect x="242.00000000000003" y="252" width="77.2" height="14" rx="3" class="c-mask"/>
-          <text x="280.6" y="262" class="t-edge-default" font-size="8" text-anchor="middle">写入及保存完成</text>
+          <text x="280.6" y="262" class="t-edge-emphasis" font-size="8" text-anchor="middle">写入及保存完成</text>
         </g>
 
         <!-- Legend -->

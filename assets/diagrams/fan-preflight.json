@@ -104,42 +104,48 @@
       "from": "click",
       "to": "snapshot",
       "label": "进入",
-      "role": "main"
+      "role": "main",
+      "variant": "emphasis"
     },
     {
       "id": "read-check",
       "from": "snapshot",
       "to": "check",
       "label": "读取成功",
-      "role": "main"
+      "role": "main",
+      "variant": "emphasis"
     },
     {
       "id": "read-reject",
       "from": "snapshot",
       "to": "no-write",
       "label": "读取失败",
-      "role": "error"
+      "role": "error",
+      "variant": "security"
     },
     {
       "id": "check-build",
       "from": "check",
       "to": "build",
       "label": "布局已验证且温度有效",
-      "role": "main"
+      "role": "main",
+      "variant": "emphasis"
     },
     {
       "id": "check-reject",
       "from": "check",
       "to": "no-write",
       "label": "条件不满足",
-      "role": "error"
+      "role": "error",
+      "variant": "security"
     },
     {
       "id": "build-reject",
       "from": "build",
       "to": "no-write",
       "label": "硬件范围不支持",
-      "role": "error"
+      "role": "error",
+      "variant": "security"
     }
   ],
   "semanticChecks": {

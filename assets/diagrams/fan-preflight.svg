@@ -450,12 +450,12 @@ rect.c-bg-rect { fill: var(--bg); }
 
 
         <!-- Edge paths -->
-        <path data-edge-from="build" data-edge-to="no-write" data-edge-label="硬件范围不支持" data-edge-key="0" data-edge-id="build-reject" data-composition-routing="workflow-v2-auto" data-edge-role="error" data-composition-points="793.4,328;793.4,432;564.4,432" d="M 793.4 328 L 793.4 432 L 564.4 432" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="check" data-edge-to="build" data-edge-label="布局已验证且温度有效" data-edge-key="1" data-edge-id="check-build" data-composition-routing="workflow-v2-auto" data-edge-role="main" data-composition-points="564.4,282;678.4,282" d="M 564.4 282 L 678.4 282" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="check" data-edge-to="no-write" data-edge-label="条件不满足" data-edge-key="2" data-edge-id="check-reject" data-composition-routing="workflow-v2-auto" data-edge-role="error" data-composition-points="449.4,328;449.4,394" d="M 449.4 328 L 449.4 394" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="click" data-edge-to="snapshot" data-edge-label="进入" data-edge-key="3" data-edge-id="click-read" data-composition-routing="workflow-v2-auto" data-edge-role="main" data-composition-points="48,132;20,132;20,282;48,282" d="M 48 132 L 20 132 L 20 282 L 48 282" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="snapshot" data-edge-to="check" data-edge-label="读取成功" data-edge-key="4" data-edge-id="read-check" data-composition-routing="workflow-v2-auto" data-edge-role="main" data-composition-points="278,282;334.4,282" d="M 278 282 L 334.4 282" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="snapshot" data-edge-to="no-write" data-edge-label="读取失败" data-edge-key="5" data-edge-id="read-reject" data-composition-routing="workflow-v2-auto" data-edge-role="error" data-composition-points="163,320;163,432;334.4,432" d="M 163 320 L 163 432 L 334.4 432" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="build" data-edge-to="no-write" data-edge-label="硬件范围不支持" data-edge-key="0" data-edge-id="build-reject" data-composition-routing="workflow-v2-auto" data-edge-role="error" data-composition-points="793.4,328;793.4,432;564.4,432" d="M 793.4 328 L 793.4 432 L 564.4 432" class="a-security" stroke-width="1.4" marker-end="url(#arrowhead-security)"/>
+        <path data-edge-from="check" data-edge-to="build" data-edge-label="布局已验证且温度有效" data-edge-key="1" data-edge-id="check-build" data-composition-routing="workflow-v2-auto" data-edge-role="main" data-composition-points="564.4,282;678.4,282" d="M 564.4 282 L 678.4 282" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="check" data-edge-to="no-write" data-edge-label="条件不满足" data-edge-key="2" data-edge-id="check-reject" data-composition-routing="workflow-v2-auto" data-edge-role="error" data-composition-points="449.4,328;449.4,394" d="M 449.4 328 L 449.4 394" class="a-security" stroke-width="1.4" marker-end="url(#arrowhead-security)"/>
+        <path data-edge-from="click" data-edge-to="snapshot" data-edge-label="进入" data-edge-key="3" data-edge-id="click-read" data-composition-routing="workflow-v2-auto" data-edge-role="main" data-composition-points="48,132;20,132;20,282;48,282" d="M 48 132 L 20 132 L 20 282 L 48 282" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="snapshot" data-edge-to="check" data-edge-label="读取成功" data-edge-key="4" data-edge-id="read-check" data-composition-routing="workflow-v2-auto" data-edge-role="main" data-composition-points="278,282;334.4,282" d="M 278 282 L 334.4 282" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="snapshot" data-edge-to="no-write" data-edge-label="读取失败" data-edge-key="5" data-edge-id="read-reject" data-composition-routing="workflow-v2-auto" data-edge-role="error" data-composition-points="163,320;163,432;334.4,432" d="M 163 320 L 163 432 L 334.4 432" class="a-security" stroke-width="1.4" marker-end="url(#arrowhead-security)"/>
 
         <!-- Nodes -->
         <g id="node-click" data-node-id="click" data-node-label="点击仅风扇静音" tabindex="0" role="button" aria-label="聚焦点击仅风扇静音，不执行性能模式脚本, 用户操作" aria-pressed="false" data-node-kind="external" data-node-sublabel="不执行性能模式脚本" data-node-context="用户操作">
@@ -521,27 +521,27 @@ rect.c-bg-rect { fill: var(--bg); }
         <!-- Edge labels -->
         <g data-edge-from="build" data-edge-to="no-write" data-edge-label="硬件范围不支持" data-edge-key="0" data-edge-id="build-reject">
           <rect x="640.3" y="412" width="77.2" height="14" rx="3" class="c-mask"/>
-          <text x="678.9" y="422" class="t-edge-default" font-size="8" text-anchor="middle">硬件范围不支持</text>
+          <text x="678.9" y="422" class="t-edge-security" font-size="8" text-anchor="middle">硬件范围不支持</text>
         </g>
         <g data-edge-from="check" data-edge-to="build" data-edge-label="布局已验证且温度有效" data-edge-key="1" data-edge-id="check-build">
           <rect x="568.4" y="262" width="106" height="14" rx="3" class="c-mask"/>
-          <text x="621.4" y="272" class="t-edge-default" font-size="8" text-anchor="middle">布局已验证且温度有效</text>
+          <text x="621.4" y="272" class="t-edge-emphasis" font-size="8" text-anchor="middle">布局已验证且温度有效</text>
         </g>
         <g data-edge-from="check" data-edge-to="no-write" data-edge-label="条件不满足" data-edge-key="2" data-edge-id="check-reject">
           <rect x="420.4" y="351" width="58" height="14" rx="3" class="c-mask"/>
-          <text x="449.4" y="361" class="t-edge-default" font-size="8" text-anchor="middle">条件不满足</text>
+          <text x="449.4" y="361" class="t-edge-security" font-size="8" text-anchor="middle">条件不满足</text>
         </g>
         <g data-edge-from="click" data-edge-to="snapshot" data-edge-label="进入" data-edge-key="3" data-edge-id="click-read">
           <rect x="19" y="112" width="30" height="14" rx="3" class="c-mask"/>
-          <text x="34" y="122" class="t-edge-default" font-size="8" text-anchor="middle">进入</text>
+          <text x="34" y="122" class="t-edge-emphasis" font-size="8" text-anchor="middle">进入</text>
         </g>
         <g data-edge-from="snapshot" data-edge-to="check" data-edge-label="读取成功" data-edge-key="4" data-edge-id="read-check">
           <rect x="282" y="262" width="48.4" height="14" rx="3" class="c-mask"/>
-          <text x="306.2" y="272" class="t-edge-default" font-size="8" text-anchor="middle">读取成功</text>
+          <text x="306.2" y="272" class="t-edge-emphasis" font-size="8" text-anchor="middle">读取成功</text>
         </g>
         <g data-edge-from="snapshot" data-edge-to="no-write" data-edge-label="读取失败" data-edge-key="5" data-edge-id="read-reject">
           <rect x="224.5" y="412" width="48.4" height="14" rx="3" class="c-mask"/>
-          <text x="248.7" y="422" class="t-edge-default" font-size="8" text-anchor="middle">读取失败</text>
+          <text x="248.7" y="422" class="t-edge-security" font-size="8" text-anchor="middle">读取失败</text>
         </g>
 
         <!-- Legend -->

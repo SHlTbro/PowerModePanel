@@ -133,49 +133,56 @@
       "from": "build",
       "to": "write",
       "label": "曲线范围与最低风量合法",
-      "role": "main"
+      "role": "main",
+      "variant": "emphasis"
     },
     {
       "id": "write-verify",
       "from": "write",
       "to": "verify",
       "label": "写入及保存完成",
-      "role": "main"
+      "role": "main",
+      "variant": "emphasis"
     },
     {
       "id": "write-rollback",
       "from": "write",
       "to": "rollback",
       "label": "任一写入或保存失败",
-      "role": "error"
+      "role": "error",
+      "variant": "security"
     },
     {
       "id": "verify-success",
       "from": "verify",
       "to": "success",
       "label": "全部回读一致",
-      "role": "main"
+      "role": "main",
+      "variant": "emphasis"
     },
     {
       "id": "verify-rollback",
       "from": "verify",
       "to": "rollback",
       "label": "任一回读不一致",
-      "role": "error"
+      "role": "error",
+      "variant": "security"
     },
     {
       "id": "restore-pass",
       "from": "rollback",
       "to": "restored",
       "label": "恢复回读一致",
-      "role": "branch"
+      "role": "branch",
+      "variant": "security"
     },
     {
       "id": "restore-fail",
       "from": "rollback",
       "to": "oem-auto",
       "label": "恢复报错或回读不一致",
-      "role": "error"
+      "role": "error",
+      "variant": "security"
     }
   ],
   "semanticChecks": {
