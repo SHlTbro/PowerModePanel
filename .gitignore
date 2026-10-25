@@ -1,0 +1,4 @@
+bin/
+artifacts/
+BackgroundWhitelist.txt
+BackgroundBlacklist.old.txt
