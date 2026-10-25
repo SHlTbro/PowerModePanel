@@ -1,0 +1,16 @@
+C4Context
+  title PowerModePanel 系统上下文
+  Person(user, "笔记本使用者", "在本地选择操作")
+  System(panel, "PowerModePanel", "Windows 风扇与电源工具")
+  System_Ext(windows, "Windows", "电源策略、监测和进程")
+  System_Ext(oem, "OEM Control Center", "风扇驱动与固件")
+  System_Ext(nvidia, "NVIDIA 驱动工具", "GPU 状态和功耗请求")
+  Rel(user, panel, "选择操作", "WinForms")
+  Rel(panel, windows, "调整电源、读取指标、操作进程", "Windows API / powercfg")
+  Rel(panel, oem, "读写风扇曲线和风扇模式", "OEM native API")
+  Rel(panel, nvidia, "查询GPU、请求功耗", "nvidia-smi")
+  UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
+  UpdateRelStyle(user, panel, $offsetY="20")
+  UpdateRelStyle(panel, windows, $offsetY="-35")
+  UpdateRelStyle(panel, oem, $offsetX="-110", $offsetY="10")
+  UpdateRelStyle(panel, nvidia, $offsetX="200", $offsetY="140")

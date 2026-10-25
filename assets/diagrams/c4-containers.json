@@ -1,0 +1,191 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "运行结构：一个桌面程序与按需子进程",
+    "output": "public/assets/diagrams/c4-containers.html",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "legend": {
+      "entries": {
+        "frontend": {
+          "label": "桌面程序"
+        },
+        "backend": {
+          "label": "脚本进程"
+        },
+        "external": {
+          "label": "用户与外部系统"
+        }
+      }
+    }
+  },
+  "components": [
+    {
+      "id": "user",
+      "type": "external",
+      "label": "笔记本使用者",
+      "sublabel": "人 · 本地操作",
+      "pos": [
+        40,
+        20
+      ],
+      "size": [
+        180,
+        80
+      ]
+    },
+    {
+      "id": "exe",
+      "type": "frontend",
+      "label": "PowerModePanel.exe",
+      "sublabel": "容器 · C# / WinForms",
+      "pos": [
+        40,
+        210
+      ],
+      "size": [
+        200,
+        80
+      ]
+    },
+    {
+      "id": "ps",
+      "type": "backend",
+      "label": "PowerShell 子进程",
+      "sublabel": "容器 · Windows PowerShell",
+      "pos": [
+        420,
+        210
+      ],
+      "size": [
+        200,
+        80
+      ]
+    },
+    {
+      "id": "oem",
+      "type": "external",
+      "label": "OEM Control Center",
+      "sublabel": "外部系统 · InsydeDCHU / 固件",
+      "pos": [
+        40,
+        400
+      ],
+      "size": [
+        200,
+        80
+      ]
+    },
+    {
+      "id": "nvidia",
+      "type": "external",
+      "label": "NVIDIA 驱动工具",
+      "sublabel": "外部系统 · nvidia-smi",
+      "pos": [
+        420,
+        400
+      ],
+      "size": [
+        200,
+        80
+      ]
+    },
+    {
+      "id": "windows",
+      "type": "external",
+      "label": "Windows",
+      "sublabel": "外部系统 · 电源 / WMI / 进程",
+      "pos": [
+        420,
+        20
+      ],
+      "size": [
+        200,
+        80
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "PowerModePanel 项目 · 本地运行边界",
+      "wraps": [
+        "exe",
+        "ps"
+      ],
+      "pad": 38
+    }
+  ],
+  "connections": [
+    {
+      "id": "choose",
+      "from": "user",
+      "to": "exe",
+      "label": "操作 / WinForms",
+      "variant": "emphasis"
+    },
+    {
+      "id": "launch-script",
+      "from": "exe",
+      "to": "ps",
+      "label": "启动 / Process.Start",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "fan-api",
+      "from": "exe",
+      "to": "oem",
+      "label": "风扇读写 / Winapi",
+      "variant": "emphasis"
+    },
+    {
+      "id": "gpu-query",
+      "from": "exe",
+      "to": "nvidia",
+      "label": "查询 / nvidia-smi",
+      "variant": "emphasis"
+    },
+    {
+      "id": "system-api",
+      "from": "exe",
+      "to": "windows",
+      "label": "监测与进程 / WMI、Win32",
+      "variant": "emphasis"
+    },
+    {
+      "id": "set-power",
+      "from": "ps",
+      "to": "windows",
+      "label": "设置 / powercfg",
+      "variant": "emphasis"
+    },
+    {
+      "id": "gpu-request",
+      "from": "ps",
+      "to": "nvidia",
+      "label": "功耗请求 / nvidia-smi",
+      "variant": "emphasis"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "同一 EXE 内的职责",
+      "items": [
+        "C# / .NET Framework / WinForms x64；界面、风扇、监测与清理同属一个 EXE。",
+        "FanController 通过 Winapi 委托调用已安装 OEM DLL。"
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "文件与依赖",
+      "items": [
+        "两个 .ps1 随程序分发，按按钮启动子进程。",
+        "白名单是本地文本文件；OEM DLL 由厂商安装，不随包分发。"
+      ]
+    }
+  ]
+}

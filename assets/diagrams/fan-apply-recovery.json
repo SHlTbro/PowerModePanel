@@ -1,0 +1,239 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "写入后：回读确认，失败恢复原曲线与模式",
+    "output": "public/assets/diagrams/fan-apply-recovery.html",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "legend": {
+      "entries": {
+        "frontend": {
+          "label": "界面反馈"
+        },
+        "backend": {
+          "label": "控制逻辑"
+        },
+        "security": {
+          "label": "校验与恢复"
+        },
+        "external": {
+          "label": "用户操作"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "control",
+      "label": "独立风扇控制 · 同一 EXE 内"
+    },
+    {
+      "id": "restore",
+      "label": "写入失败后的恢复",
+      "variant": "exception"
+    },
+    {
+      "id": "manual",
+      "label": "需要人工处理",
+      "variant": "exception"
+    }
+  ],
+  "mainPath": [
+    "build",
+    "write",
+    "verify",
+    "success"
+  ],
+  "nodes": [
+    {
+      "id": "build",
+      "lane": "control",
+      "col": 0,
+      "type": "backend",
+      "label": "生成低噪曲线",
+      "sublabel": "保留原自定义缓存，检查最低风量",
+      "width": 190,
+      "height": 92,
+      "tag": "CPU 75→85°C · GPU 70→80°C",
+      "yOffset": -70
+    },
+    {
+      "id": "write",
+      "lane": "control",
+      "col": 0,
+      "type": "backend",
+      "label": "应用风扇设置",
+      "sublabel": "14 曲线 → 121/1 模式 6",
+      "width": 190,
+      "height": 92,
+      "tag": "仅保存 App4/5 风扇模式",
+      "yOffset": 70
+    },
+    {
+      "id": "verify",
+      "lane": "control",
+      "col": 2,
+      "type": "security",
+      "label": "回读并核对",
+      "sublabel": "风扇模式 / 固件 13 / 性能档",
+      "width": 190,
+      "height": 92,
+      "tag": "曲线一致且原性能档不变",
+      "yOffset": 70
+    },
+    {
+      "id": "success",
+      "lane": "control",
+      "col": 4,
+      "type": "frontend",
+      "label": "显示低噪曲线",
+      "sublabel": "固件根据温度自动调速",
+      "width": 190,
+      "height": 76,
+      "yOffset": 70
+    },
+    {
+      "id": "rollback",
+      "lane": "restore",
+      "col": 2,
+      "type": "backend",
+      "label": "恢复原曲线与模式",
+      "sublabel": "曲线 + 原模式 + App4/5，再回读",
+      "width": 190,
+      "height": 76,
+      "yOffset": 0
+    },
+    {
+      "id": "restored",
+      "lane": "restore",
+      "col": 4,
+      "type": "frontend",
+      "label": "报告失败，已恢复",
+      "sublabel": "保留原来的风扇状态",
+      "width": 190,
+      "height": 76,
+      "yOffset": 0
+    },
+    {
+      "id": "oem-auto",
+      "lane": "manual",
+      "col": 4,
+      "type": "security",
+      "label": "提示厂商面板恢复 Auto",
+      "sublabel": "恢复失败时明确报告错误",
+      "width": 190,
+      "height": 76,
+      "yOffset": 0
+    }
+  ],
+  "edges": [
+    {
+      "id": "build-write",
+      "from": "build",
+      "to": "write",
+      "label": "曲线范围与最低风量合法",
+      "role": "main"
+    },
+    {
+      "id": "write-verify",
+      "from": "write",
+      "to": "verify",
+      "label": "写入及保存完成",
+      "role": "main"
+    },
+    {
+      "id": "write-rollback",
+      "from": "write",
+      "to": "rollback",
+      "label": "任一写入或保存失败",
+      "role": "error"
+    },
+    {
+      "id": "verify-success",
+      "from": "verify",
+      "to": "success",
+      "label": "全部回读一致",
+      "role": "main"
+    },
+    {
+      "id": "verify-rollback",
+      "from": "verify",
+      "to": "rollback",
+      "label": "任一回读不一致",
+      "role": "error"
+    },
+    {
+      "id": "restore-pass",
+      "from": "rollback",
+      "to": "restored",
+      "label": "恢复回读一致",
+      "role": "branch"
+    },
+    {
+      "id": "restore-fail",
+      "from": "rollback",
+      "to": "oem-auto",
+      "label": "恢复报错或回读不一致",
+      "role": "error"
+    }
+  ],
+  "semanticChecks": {
+    "allowedRoots": [
+      "build"
+    ],
+    "allowedTerminals": [
+      "success",
+      "restored",
+      "oem-auto"
+    ],
+    "requiredEdges": [
+      {
+        "from": "build",
+        "to": "write"
+      },
+      {
+        "from": "write",
+        "to": "verify"
+      },
+      {
+        "from": "write",
+        "to": "rollback"
+      },
+      {
+        "from": "verify",
+        "to": "success"
+      },
+      {
+        "from": "verify",
+        "to": "rollback"
+      },
+      {
+        "from": "rollback",
+        "to": "restored"
+      },
+      {
+        "from": "rollback",
+        "to": "oem-auto"
+      }
+    ]
+  },
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "写入边界",
+      "items": [
+        "不写 Windows 电源设置、GPU 设置或整机性能档。",
+        "低温约 25%；CPU 85°C / GPU 80°C 达到全速。"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "恢复原状态",
+      "items": [
+        "已启用低噪时再操作，失败仍恢复此前实际低噪曲线。",
+        "恢复自动按钮使用原缓存曲线和模式 0。"
+      ]
+    }
+  ]
+}

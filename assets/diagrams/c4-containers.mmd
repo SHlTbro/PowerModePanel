@@ -1,0 +1,25 @@
+C4Container
+  title PowerModePanel 可运行边界
+  Person(user, "笔记本使用者", "本地按钮操作")
+  System_Ext(oem, "OEM Control Center", "InsydeDCHU 与固件")
+  System_Ext(windows, "Windows", "powercfg、WMI、进程 API")
+  System_Ext(nvidia, "NVIDIA 驱动工具", "nvidia-smi")
+  System_Boundary(project, "PowerModePanel 项目") {
+    Container(exe, "PowerModePanel.exe", "C# / .NET Framework / WinForms", "界面、风扇控制、监测与清理")
+    Container(ps, "PowerShell 子进程", "Windows PowerShell / 两个 ps1", "按需执行性能与节能档")
+  }
+  Rel(user, exe, "选择操作", "WinForms")
+  Rel(exe, ps, "执行模式脚本", "Process.Start")
+  Rel(exe, oem, "读写风扇曲线与状态", "native DLL / Winapi")
+  Rel(exe, windows, "采样与进程操作", "WMI / Win32")
+  Rel(exe, nvidia, "读取 GPU 指标", "nvidia-smi")
+  Rel(ps, windows, "设置电源参数", "powercfg")
+  Rel(ps, nvidia, "请求 GPU 功耗限制", "nvidia-smi")
+  UpdateLayoutConfig("5", "1")
+  UpdateRelStyle(user, exe, $offsetX="-90", $offsetY="10")
+  UpdateRelStyle(exe, oem, $offsetX="-70", $offsetY="-90")
+  UpdateRelStyle(exe, windows, $offsetX="-60", $offsetY="-20")
+  UpdateRelStyle(exe, nvidia, $offsetX="80", $offsetY="40")
+  UpdateRelStyle(ps, windows, $offsetX="100", $offsetY="40")
+  UpdateRelStyle(ps, nvidia, $offsetX="160", $offsetY="-60")
+  UpdateRelStyle(exe, ps, $offsetY="40")

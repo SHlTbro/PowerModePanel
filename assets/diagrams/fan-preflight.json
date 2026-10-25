@@ -1,0 +1,190 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "写入前：确认硬件与温度，条件不符即停止",
+    "output": "public/assets/diagrams/fan-preflight.html",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "legend": {
+      "entries": {
+        "frontend": {
+          "label": "界面反馈"
+        },
+        "backend": {
+          "label": "控制逻辑"
+        },
+        "security": {
+          "label": "校验与恢复"
+        },
+        "external": {
+          "label": "用户操作"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "input",
+      "label": "用户操作"
+    },
+    {
+      "id": "control",
+      "label": "独立风扇控制 · 同一 EXE 内"
+    },
+    {
+      "id": "reject",
+      "label": "写入前拒绝",
+      "variant": "exception"
+    }
+  ],
+  "mainPath": [
+    "click",
+    "snapshot",
+    "check",
+    "build"
+  ],
+  "nodes": [
+    {
+      "id": "click",
+      "lane": "input",
+      "col": 0,
+      "type": "external",
+      "label": "点击仅风扇静音",
+      "sublabel": "不执行性能模式脚本",
+      "width": 230,
+      "height": 76
+    },
+    {
+      "id": "snapshot",
+      "lane": "control",
+      "col": 0,
+      "type": "backend",
+      "label": "读取原始状态",
+      "sublabel": "原风扇模式 / 性能档 / 缓存曲线",
+      "width": 230,
+      "height": 76
+    },
+    {
+      "id": "check",
+      "lane": "control",
+      "col": 2,
+      "type": "security",
+      "label": "检查布局与温度",
+      "sublabel": "双风扇布局 / 数据长度 / 原模式",
+      "width": 230,
+      "height": 92,
+      "tag": "CPU < 85°C · GPU < 80°C"
+    },
+    {
+      "id": "build",
+      "lane": "control",
+      "col": 4,
+      "type": "backend",
+      "label": "生成低噪曲线",
+      "sublabel": "保留原自定义缓存，检查最低风量",
+      "width": 230,
+      "height": 92,
+      "tag": "CPU 75→85°C · GPU 70→80°C"
+    },
+    {
+      "id": "no-write",
+      "lane": "reject",
+      "col": 2,
+      "type": "security",
+      "label": "拒绝且不写入",
+      "sublabel": "热机 / 读取 / 布局 / 范围异常",
+      "width": 230,
+      "height": 76
+    }
+  ],
+  "edges": [
+    {
+      "id": "click-read",
+      "from": "click",
+      "to": "snapshot",
+      "label": "进入",
+      "role": "main"
+    },
+    {
+      "id": "read-check",
+      "from": "snapshot",
+      "to": "check",
+      "label": "读取成功",
+      "role": "main"
+    },
+    {
+      "id": "read-reject",
+      "from": "snapshot",
+      "to": "no-write",
+      "label": "读取失败",
+      "role": "error"
+    },
+    {
+      "id": "check-build",
+      "from": "check",
+      "to": "build",
+      "label": "布局已验证且温度有效",
+      "role": "main"
+    },
+    {
+      "id": "check-reject",
+      "from": "check",
+      "to": "no-write",
+      "label": "条件不满足",
+      "role": "error"
+    },
+    {
+      "id": "build-reject",
+      "from": "build",
+      "to": "no-write",
+      "label": "硬件范围不支持",
+      "role": "error"
+    }
+  ],
+  "semanticChecks": {
+    "allowedRoots": [
+      "click"
+    ],
+    "allowedTerminals": [
+      "build",
+      "no-write"
+    ],
+    "requiredEdges": [
+      {
+        "from": "click",
+        "to": "snapshot"
+      },
+      {
+        "from": "snapshot",
+        "to": "check"
+      },
+      {
+        "from": "snapshot",
+        "to": "no-write"
+      },
+      {
+        "from": "check",
+        "to": "build"
+      },
+      {
+        "from": "check",
+        "to": "no-write"
+      },
+      {
+        "from": "build",
+        "to": "no-write"
+      }
+    ]
+  },
+  "cards": [
+    {
+      "dot": "amber",
+      "title": "执行之前",
+      "items": [
+        "任意读取、模式、曲线或温度检查失败，都不会执行厂商写入。",
+        "此图按检查职责分组；实际代码先生成候选曲线，再读取温度完成最后一道检查。"
+      ]
+    }
+  ]
+}
